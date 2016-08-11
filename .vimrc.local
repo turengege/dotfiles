@@ -1,0 +1,106 @@
+" user setting
+
+"LiuRui's own Settings"{
+"//let g:syntastic_check_on_open = 1
+"//let g:DoxygenToolkit_briefTag_pre="@Description"
+"//let g:DoxygenToolkit_paramTag_pre="@Param"
+"//let g:DoxygenToolkit_returnTag="@Returns"
+"//let g:DoxygenToolkit_blockHeader="--------------------------------------------------------------------------"
+"//let g:DoxygenToolkit_blockFooter="----------------------------------------------------------------------------"
+"//let g:DoxygenToolkit_authorName="Liu Rui"
+"//let g:DoxygenToolkit_licenseTag="~ ~!"
+set cursorline cursorcolumn
+"filetype plugin on 
+"filetype indent  off
+"set smartindent
+"let g:DoxygenToolkit_startCommentTag = "/************************************************************************"
+"let g:DoxygenToolkit_startCommentBlock = "/* "
+"let g:DoxygenToolkit_interCommentBlock = " * "
+"let g:DoxygenToolkit_interCommentTag = " * "
+"let g:DoxygenToolkit_endCommentTag = " */"
+"let g:DoxygenToolkit_endCommentBlock = " */"
+"set rtp += "~/.vim/c-support"
+"set rtp +="~/.vim/bundle/c.vim/c-support"
+"helptags ~/.vim/bundle/c.vim/doc
+set autowriteall
+set nospell
+
+let g:slimv_swank_cmd = '!osascript -e "tell application \"Terminal\" to do script \"sbcl --load ~/.vim/bundle/slimv/slime/start-swank.lisp\""'
+
+map <F5> : call CompileRun() <CR>
+
+function! CompileRun()
+    let ft = &ft
+    echo ft
+    if (ft == "javascript")
+        echo 'javascript run!'
+        exec ": !node  --harmony % "
+    elseif (ft == "c")
+        echo 'c run!'
+        exec ": !gcc % && ./a.out && rm a.out"
+    elseif (ft =='cpp')
+        echo 'cpp run!'
+        exec ": !g+a % && ./a.out && rm a.out"
+    elseif (ft =='java')
+        echo 'java run!'
+        exec ": !javac % && java %:r  "
+    elseif (ft == "clojure")
+        echo 'clojure run!'
+        exec ": !clj %"
+    elseif (ft =='lisp')
+        echo 'it maybe a clisp , and clisp run'
+        exec ": !clisp %"
+    elseif (ft == 'python')
+        echo 'python run!'
+        exec ": !python %"
+    elseif (ft == 'swift')
+        echo 'swift run!'
+        exec ": !xcrun swiftc % -o a &&./a && rm a"
+    elseif (ft == 'sh')
+        echo 'sh run!'
+        exec ": !bash %"
+    elseif (ft == 'go')
+        echo 'go run!'
+        exec ": !go run %"
+    elseif (ft == 'lua')
+        echo 'lua run!'
+        exec ": !luvit %"
+    else 
+        echo printf('i dont how to run this kind of filetype : %s',ft)
+    endif
+endfunction    
+"au BufRead *.html set filetype=htmlm4
+au BufRead *.vue set filetype=html
+
+
+
+
+
+
+
+
+ if !has('gui')
+    if empty($TMUX)
+      let &t_SI = "\<Esc>]50;CursorShape=1\x7"
+      let &t_EI = "\<Esc>]50;CursorShape=0\x7"
+      let &t_SR = "\<Esc>]50;CursorShape=2\x7"
+    else
+      let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
+      let &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=0\x7\<Esc>\\"
+      let &t_SR = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=2\x7\<Esc>\\"
+    endif
+ endif
+
+
+
+set background=dark
+let g:syntastic_javascript_checkers = ['eslint']
+let g:slimv_swank_cmd = '! tmux new-window -d -n REPL-SBCL "sbcl --load ~/.k-vim/k-vim/bundle/slimv/slime/start-swank.lisp"'
+
+let g:dbext_default_type = "MYSQL"
+let g:dbext_default_user= "gogen"
+let g:dbext_default_host= "192.168.5.141"
+let g:dbext_default_passwd = "12345"
+xmap ga <Plug>(EasyAlign)
+
+nmap ga <Plug>(EasyAlign)
