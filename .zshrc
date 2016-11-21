@@ -63,6 +63,7 @@ fpath=(/home/liurui/bin/functions $fpath)
 # export MANPATH="/usr/local/man:$MANPATH"
 source $HOME/.bash_profile
 source $ZSH/oh-my-zsh.sh
+alias ls='ls -G --color'
 
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
@@ -88,3 +89,6 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+
+export NVM_DIR="/home/liurui/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
